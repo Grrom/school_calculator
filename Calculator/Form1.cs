@@ -16,10 +16,12 @@ namespace Calculator
         public string select;
         public Form1()
         {
-            
-        InitializeComponent();
-    }
-        
+
+            InitializeComponent();
+        }
+
+        public delegate T method<T>(T txtbox1, T txtbox2);
+
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -31,53 +33,51 @@ namespace Calculator
             txtbox1 = Convert.ToInt32(textBox1.Text);
             txtbox2 = Convert.ToInt32(textBox2.Text);
 
-            algo c = new algo();
             if (select == "Add")
             {
-                method New = new method(c.Add);
+                method<int> New = new method<int>(algo.Add);
                 answer = New(txtbox1, txtbox2);
                 textBox3.Text = answer.ToString();
             }
             if (select == "Sub")
             {
-                method New = new method(c.Sub);
+                method<int> New = new method<int>(algo.Sub);
                 answer = New(txtbox1, txtbox2);
                 textBox3.Text = answer.ToString();
             }
             if (select == "Mul")
             {
-                method New = new method(c.Mul);
+                method<int> New = new method<int>(algo.Mul);
                 answer = New(txtbox1, txtbox2);
                 textBox3.Text = answer.ToString();
             }
             if (select == "Div")
             {
-                method New = new method(c.Div);
+                method<int> New = new method<int>(algo.Div);
                 answer = New(txtbox1, txtbox2);
                 textBox3.Text = answer.ToString();
             }
         }
-          public delegate int method(int txtbox1, int txtbox2);
         class algo
         {
-            public int Add(int ab, int cd)
+            public static int Add(int ab, int cd)
             {
                 return ab + cd;
             }
-            public int Sub(int ab, int cd)
+            public static int Sub(int ab, int cd)
             {
                 return ab - cd;
             }
-            public int Mul(int ab, int cd)
+            public static int Mul(int ab, int cd)
             {
                 return ab * cd;
             }
-            public int Div(int ab, int cd)
+            public static int Div(int ab, int cd)
             {
                 return ab / cd;
             }
         }
-        
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             select = comboBox1.SelectedItem.ToString();
@@ -98,5 +98,5 @@ namespace Calculator
 
         }
     }
-} 
+}
 
