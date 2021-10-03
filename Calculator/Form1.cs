@@ -30,33 +30,53 @@ namespace Calculator
         private void button1_Click(object sender, EventArgs e)
         {
 
-            txtbox1 = Convert.ToInt32(textBox1.Text);
-            txtbox2 = Convert.ToInt32(textBox2.Text);
+            string parseFails = "Input is not a number: ";
 
-            if (select == "Add")
+            if (!int.TryParse(textBox1.Text, out txtbox1))
             {
-                method<int> New = new method<int>(algo.Add);
-                answer = New(txtbox1, txtbox2);
-                textBox3.Text = answer.ToString();
+                textBox1.Text = "";
+                parseFails += "Text Box 1";
             }
-            if (select == "Sub")
+
+            if (!int.TryParse(textBox2.Text, out txtbox2))
             {
-                method<int> New = new method<int>(algo.Sub);
-                answer = New(txtbox1, txtbox2);
-                textBox3.Text = answer.ToString();
+                textBox2.Text = "";
+                parseFails += "Text Box 2";
             }
-            if (select == "Mul")
+
+            if (parseFails.Length != 23)
             {
-                method<int> New = new method<int>(algo.Mul);
-                answer = New(txtbox1, txtbox2);
-                textBox3.Text = answer.ToString();
+                MessageBox.Show(parseFails);
             }
-            if (select == "Div")
+            else
             {
-                method<int> New = new method<int>(algo.Div);
-                answer = New(txtbox1, txtbox2);
-                textBox3.Text = answer.ToString();
+                if (select == "+")
+                {
+                    method<int> New = new method<int>(algo.Add);
+                    answer = New(txtbox1, txtbox2);
+                    textBox3.Text = answer.ToString();
+                }
+                if (select == "-")
+                {
+                    method<int> New = new method<int>(algo.Sub);
+                    answer = New(txtbox1, txtbox2);
+                    textBox3.Text = answer.ToString();
+                }
+                if (select == "*")
+                {
+                    method<int> New = new method<int>(algo.Mul);
+                    answer = New(txtbox1, txtbox2);
+                    textBox3.Text = answer.ToString();
+                }
+                if (select == "/")
+                {
+                    method<int> New = new method<int>(algo.Div);
+                    answer = New(txtbox1, txtbox2);
+                    textBox3.Text = answer.ToString();
+                }
             }
+
+
         }
         class algo
         {
